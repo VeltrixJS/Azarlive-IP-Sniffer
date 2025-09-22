@@ -1,5 +1,4 @@
 (function () {
-    // Helper pour créer les éléments HTML
     const createElement = (tag, options = {}, children = []) => {
         const el = document.createElement(tag);
         Object.assign(el, options);
@@ -7,8 +6,6 @@
         children.forEach(child => el.appendChild(child));
         return el;
     };
-
-    // Container principal
     const ipContainer = createElement('div', {
         id: 'ip-container',
         style: {
@@ -81,16 +78,12 @@
         </div>
     `;
     document.body.appendChild(ipContainer);
-
-    // Boutons
     document.getElementById('clear-ip-list').onclick = () => {
         document.getElementById('ip-addresses').innerHTML = '';
     };
     document.getElementById('close-ip-container').onclick = () => {
         ipContainer.remove();
     };
-
-    // Draggable
     function makeDraggable(el, handle) {
         let posX = 0, posY = 0, mouseX = 0, mouseY = 0;
         handle.onmousedown = (e) => {
@@ -110,9 +103,7 @@
         };
     }
     makeDraggable(ipContainer, document.getElementById('drag-handle'));
-
-    // Interception WebRTC
-    const shownIPs = new Set(); // évite doublons
+    const shownIPs = new Set(); 
     window.oRTCPeerConnection = window.oRTCPeerConnection || window.RTCPeerConnection;
     window.RTCPeerConnection = function (...args) {
         const pc = new window.oRTCPeerConnection(...args);
