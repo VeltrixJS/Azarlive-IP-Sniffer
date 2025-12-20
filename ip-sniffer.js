@@ -1,4 +1,4 @@
-function () {
+(function () {
     const createElement = (tag, options = {}, children = []) => {
         const el = document.createElement(tag);
         Object.assign(el, options);
@@ -265,7 +265,5 @@ function () {
             return pc.oaddIceCandidate(iceCandidate, ...rest);
         };
         return pc;
-    };
-})();
     };
 })();
