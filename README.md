@@ -27,9 +27,6 @@ Un script JavaScript qui détecte les adresses IP publiques via **WebRTC** et le
   - Bouton **Close** pour supprimer le widget
   - Widget **déplaçable** et redimensionnable
 
-- **Gestion des doublons**  
-  Chaque IP n’est affichée qu’une seule fois grâce à l’utilisation d’un `Set`.
-
 - **Enrichissement des données IP**  
   Récupération automatique des informations via l’API [ipapi.co](https://ipapi.co).
 
