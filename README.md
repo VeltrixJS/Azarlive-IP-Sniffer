@@ -1,4 +1,4 @@
-IP Sniffer Widget pour Azar
+### IP Sniffer Widget pour Azar
 Un script JavaScript conçu pour [Azar](https://azarlive.com/) qui détecte les adresses IP publiques via WebRTC et les affiche dans une interface utilisateur moderne, interactive et enrichie avec des données de géolocalisation.
 
 ---
