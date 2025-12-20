@@ -41,5 +41,6 @@ Un script JavaScript qui détecte les adresses IP locales et publiques via **Web
 
 ## 📷 Aperçu
 
-<img width="424" height="297" alt="image" src="https://github.com/user-attachments/assets/c54bbcff-d627-4776-a4b3-a9113778e521" />
+<img width="424" height="297" alt="image" src="<img width="398" height="249" alt="image" src="https://github.com/user-attachments/assets/089821d5-818e-4b42-8273-7ba2884d099f" />
+" />
 
