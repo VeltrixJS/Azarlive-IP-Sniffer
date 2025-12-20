@@ -12,23 +12,27 @@ Un script JavaScript qui détecte les adresses IP publiques via **WebRTC** et le
 - **Affichage structuré et enrichi**
   - Heure de détection
   - Adresse IP
-  - Fournisseur d’accès (ISP)
+  - Fournisseur d'accès (ISP)
   - **Ville**
   - **Nom du département / région**
   - **Numéro du département (France)**
-
+  
   *Exemple :*  
-  `Marseille (Provence-Alpes-Côte d’Azur – 13)`
+  `Marseille (Provence-Alpes-Côte d'Azur – 13)`
 
 - **Interface interactive**
-  - Bouton **Copy IP** pour copier l’adresse IP
+  - Bouton **Copy IP** pour copier l'adresse IP
   - Bouton **Google Maps** pour ouvrir directement la ville détectée
   - Bouton **Clear** pour vider la liste
-  - Bouton **Close** pour supprimer le widget
+  - Bouton **X** pour supprimer le widget
   - Widget **déplaçable** et redimensionnable
+  - **Bouton "📺 2ème écran"** pour ouvrir une fenêtre popup indépendante
+    - Permet de déplacer l'interface sur un second écran
+    - Synchronisation automatique des IP détectées
+    - Fenêtre redimensionnable et repositionnable
 
 - **Enrichissement des données IP**  
-  Récupération automatique des informations via l’API [ipapi.co](https://ipapi.co).
+  Récupération automatique des informations via l'API [ipapi.co](https://ipapi.co).
 
 ---
 
@@ -38,31 +42,38 @@ Un script JavaScript qui détecte les adresses IP publiques via **WebRTC** et le
 2. Ouvrir la console de votre navigateur (**F12 → Console**).
 3. Coller le script et appuyer sur **Entrée**.
 4. Le widget apparaît et commence à détecter les IP automatiquement via WebRTC.
+5. **(Optionnel)** Cliquer sur **📺 2ème écran** pour ouvrir une fenêtre popup et la déplacer sur un second écran.
 
 ---
 
 ## 🛠️ Aspects techniques
 
 - **Langage** : JavaScript (ES6+)
+
 - **API utilisées** :
   - `RTCPeerConnection` pour récupérer les IP publiques via WebRTC
-  - `fetch()` pour interroger l’API `ipapi.co`
+  - `fetch()` pour interroger l'API `ipapi.co`
+  - `window.open()` pour créer des fenêtres popup multi-écran
+
 - **Géolocalisation (France)** :
   - Nom du département / région : `data.region`
   - Numéro du département : deux premiers chiffres du code postal
-- **Interface UI** :
-  - Créée dynamiquement avec `document.createElement` et `innerHTML`
-- **Drag & Drop** :
-  - Implémenté via les événements `mousedown`, `mousemove` et `mouseup`
-- **Gestion des états** :
-  - Utilisation d’un `Set` pour éviter les doublons d’IP
-- **Robustesse** :
-  - Protection contre les erreurs liées aux données manquantes
 
----
+- **Interface UI** :
+  - Créée avec `document.createElement` et `innerHTML`
+  - Interface principale intégrée dans la page
+  - Fenêtre popup indépendante avec HTML/CSS injecté dynamiquement
+
+
+- **Multi-écran** :
+  - Utilisation de `window.open()` pour créer une fenêtre séparée
+  - Synchronisation en temps réel entre l'interface principale et la popup
+  - Gestion de l'état de la fenêtre (ouverte/fermée)
+
 
 ## 📷 Aperçu
 
+### Interface principale
 <img width="398" height="249" alt="image" src="https://github.com/user-attachments/assets/089821d5-818e-4b42-8273-7ba2884d099f" />
 
 
