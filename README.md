@@ -1,6 +1,5 @@
-# IP Sniffer Widget
-
-Un script JavaScript qui détecte les adresses IP publiques via **WebRTC** et les affiche dans une interface utilisateur moderne, interactive et enrichie avec des données de géolocalisation.
+IP Sniffer Widget pour Azar
+Un script JavaScript conçu pour [Azar](https://azarlive.com/) qui détecte les adresses IP publiques via WebRTC et les affiche dans une interface utilisateur moderne, interactive et enrichie avec des données de géolocalisation.
 
 ---
 
@@ -38,11 +37,13 @@ Un script JavaScript qui détecte les adresses IP publiques via **WebRTC** et le
 
 ## 📌 Utilisation
 
-1. Copier le script `ip-sniffer.js`.
-2. Ouvrir la console de votre navigateur (**F12 → Console**).
-3. Coller le script et appuyer sur **Entrée**.
-4. Le widget apparaît et commence à détecter les IP automatiquement via WebRTC.
-5. **(Optionnel)** Cliquer sur **📺 2ème écran** pour ouvrir une fenêtre popup et la déplacer sur un second écran.
+
+1. Ouvrir https://azarlive.com/ dans votre navigateur.
+2. Copier le script `ip-sniffer.js`.
+3. Ouvrir la console de votre navigateur (**F12 → Console**).
+4. Coller le script et appuyer sur **Entrée**.
+5. Le widget apparaît et commence à détecter les IP automatiquement via WebRTC.
+6. **(Optionnel)** Cliquer sur **📺 2ème écran** pour ouvrir une fenêtre popup et la déplacer sur un second écran.
 
 ---
 
