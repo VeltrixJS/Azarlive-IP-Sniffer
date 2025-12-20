@@ -31,13 +31,13 @@
 
     ipContainer.innerHTML = `
         <div id="drag-handle" style="cursor:move;margin-bottom:20px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
                 <h3 style="margin:0;color:#bb86fc;">Detected IP Addresses</h3>
-                <button id="close-ip-container" style="padding:8px 12px;border:none;background-color:#6a0dad;color:white;border-radius:8px;cursor:pointer;font-weight:bold;">✕</button>
-            </div>
-            <div style="display:flex;gap:8px;">
-                <button id="open-popup" style="flex:1;padding:10px 15px;border:none;background-color:#1e88e5;color:white;border-radius:8px;cursor:pointer;font-weight:600;">📺 Ouvrir 2ème écran</button>
-                <button id="clear-ip-list" style="flex:1;padding:10px 15px;border:none;background-color:#6a0dad;color:white;border-radius:8px;cursor:pointer;font-weight:600;">🗑️ Clear</button>
+                <div style="display:flex;gap:8px;">
+                    <button id="open-popup" style="padding:10px 15px;border:none;background-color:#1e88e5;color:white;border-radius:8px;cursor:pointer;font-weight:600;white-space:nowrap;">📺 2ème écran</button>
+                    <button id="clear-ip-list" style="padding:10px 15px;border:none;background-color:#6a0dad;color:white;border-radius:8px;cursor:pointer;font-weight:600;">Clear</button>
+                    <button id="close-ip-container" style="padding:10px 15px;border:none;background-color:#6a0dad;color:white;border-radius:8px;cursor:pointer;font-weight:bold;">X</button>
+                </div>
             </div>
         </div>
         <div id="ip-addresses"></div>
@@ -201,7 +201,6 @@
                             city + ' ' + region + ' ' + departmentNumber + ' ' + country
                         )}`;
 
-                        // Afficher dans l'interface principale
                         const ipItem = document.createElement('div');
                         ipItem.style.cssText = `
                             display: flex;
@@ -241,7 +240,6 @@
 
                         document.getElementById('ip-addresses').appendChild(ipItem);
 
-                        // Afficher dans la popup si elle est ouverte
                         if (popupWindow && !popupWindow.closed) {
                             const popupHTML = `
                                 <div class="ip-item">
