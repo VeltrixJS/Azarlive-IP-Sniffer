@@ -88,8 +88,14 @@
 
                         const city = data.city || 'Unknown City';
                         const region = data.region || 'Unknown Department';
+                        const postal = data.postal || '';
+                        const departmentNumber = postal ? postal.substring(0, 2) : '??';
                         const country = data.country_name || '';
-                        const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(city + ' ' + region + ' ' + country)}`;
+
+                        const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(
+                            city + ' ' + region + ' ' + departmentNumber + ' ' + country
+                        )}`;
+
 
                         const ipItem = document.createElement('div');
                         ipItem.style.cssText = `
