@@ -75,6 +75,7 @@ Un script JavaScript qui détecte les adresses IP publiques via **WebRTC** et le
 
 ### Interface principale
 <img width="403" height="289" alt="image" src="https://github.com/user-attachments/assets/d9de115f-344a-4984-abd7-d97a0ede3bb2" />
+
 ### Pop-up second écran 
 <img width="450" height="444" alt="image" src="https://github.com/user-attachments/assets/344cc7a7-1174-4c3b-b515-972fbd3333cb" />
 
