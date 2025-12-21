@@ -52,7 +52,8 @@
             right: '10px',
             width: '60px',
             height: '60px',
-            backgroundColor: '#6a0dad',
+            backgroundColor: '#0d0d0d',
+            border: '2px solid #6a0dad',
             borderRadius: '50%',
             zIndex: '10000',
             cursor: 'pointer',
@@ -63,7 +64,7 @@
             boxShadow: '0 4px 12px rgba(106, 13, 173, 0.6)',
         }
     });
-    miniContainer.innerHTML = '🌐';
+    miniContainer.innerHTML = '<img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyNTYiIHI9IjI0MCIgc3Ryb2tlPSIjYmI4NmZjIiBzdHJva2Utd2lkdGg9IjgiIGZpbGw9Im5vbmUiLz4KPHBhdGggZD0iTTI1NiAxNDBDMjA0IDE0MCAxNjAgMTg0IDE2MCAyMzZDMTYwIDI4OCAyMDQgMzMyIDI1NiAzMzJDMzA4IDMzMiAzNTIgMjg4IDM1MiAyMzZDMzUyIDE4NCAzMDggMTQwIDI1NiAxNDAiIHN0cm9rZT0iI2JiODZmYyIgc3Ryb2tlLXdpZHRoPSI4IiBmaWxsPSJub25lIi8+CjxwYXRoIGQ9Ik0yMzAgMzYwTDI1NiA0MDBMMjgyIDM2MEgyMzBaIiBmaWxsPSIjYmI4NmZjIi8+CjxyZWN0IHg9IjE5MCIgeT0iMjEwIiB3aWR0aD0iMTMyIiBoZWlnaHQ9IjUyIiByeD0iOCIgc3Ryb2tlPSIjYmI4NmZjIiBzdHJva2Utd2lkdGg9IjYiIGZpbGw9Im5vbmUiLz4KPHRleHQgeD0iMjU2IiB5PSIyNDUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIzNiIgZmlsbD0iI2JiODZmYyIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SUAgPC90ZXh0Pgo8L3N2Zz4=" style="width:50px;height:50px;"/>';
     document.body.appendChild(miniContainer);
 
     let popupWindow = null;
@@ -231,8 +232,16 @@
                             popupWindow.document.getElementById('ip-addresses').innerHTML = '';
                         }
 
-                        const res = await fetch(`https://ipapi.co/${ip}/json/`);
-                        const data = await res.json();
+                        const res = await fetch(`https://api.iplocation.net/?ip=${ip}`);
+                        const rawData = await res.json();
+                        
+                        const data = {
+                            city: rawData.city || 'Unknown City',
+                            region: rawData.region_name || 'Unknown Region',
+                            postal: rawData.postal_code || '',
+                            country_name: rawData.country_name || '',
+                            org: rawData.isp || 'Unknown ISP'
+                        };
 
                         const city = data.city || 'Unknown City';
                         const region = data.region || 'Unknown Department';
