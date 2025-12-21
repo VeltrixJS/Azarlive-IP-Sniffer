@@ -42,8 +42,9 @@ Un script JavaScript conçu pour [Azar](https://azarlive.com/) qui détecte les 
 2. Copier le script `ip-sniffer.js`.
 3. Ouvrir la console de votre navigateur (**F12 → Console**).
 4. Coller le script et appuyer sur **Entrée**.
-5. Le widget apparaît et commence à détecter les IP automatiquement via WebRTC.
-6. **(Optionnel)** Cliquer sur **📺 2ème écran** pour ouvrir une fenêtre popup et la déplacer sur un second écran.
+5.  **⚠️ Si erreur au collage :** Tapez `allow pasting` dans la console puis recollez
+6. Le widget apparaît et commence à détecter les IP automatiquement via WebRTC.
+7. **(Optionnel)** Cliquer sur **📺 2ème écran** pour ouvrir une fenêtre popup et la déplacer sur un second écran.
 
 ---
 
