@@ -35,7 +35,6 @@
                 <h3 style="margin:0;color:#bb86fc;">Detected IP Addresses</h3>
                 <div style="display:flex;gap:8px;">
                     <button id="open-popup" style="padding:10px 15px;border:none;background-color:#1e88e5;color:white;border-radius:8px;cursor:pointer;font-weight:600;white-space:nowrap;">📺 2ème écran</button>
-                    <button id="clear-ip-list" style="padding:10px 15px;border:none;background-color:#6a0dad;color:white;border-radius:8px;cursor:pointer;font-weight:600;">Clear</button>
                     <button id="close-ip-container" style="padding:10px 15px;border:none;background-color:#6a0dad;color:white;border-radius:8px;cursor:pointer;font-weight:bold;">X</button>
                 </div>
             </div>
@@ -45,122 +44,160 @@
     `;
     document.body.appendChild(ipContainer);
 
+    const miniContainer = createElement('div', {
+        id: 'mini-ip-container',
+        style: {
+            position: 'fixed',
+            top: '10px',
+            right: '10px',
+            width: '60px',
+            height: '60px',
+            backgroundColor: '#6a0dad',
+            borderRadius: '50%',
+            zIndex: '10000',
+            cursor: 'pointer',
+            display: 'none',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontSize: '24px',
+            boxShadow: '0 4px 12px rgba(106, 13, 173, 0.6)',
+        }
+    });
+    miniContainer.innerHTML = '🌐';
+    document.body.appendChild(miniContainer);
+
     let popupWindow = null;
 
-    document.getElementById('open-popup').onclick = () => {
-        if (popupWindow && !popupWindow.closed) {
-            popupWindow.focus();
-            return;
-        }
+    function setupEventListeners() {
+        document.getElementById('open-popup').onclick = () => {
+            if (popupWindow && !popupWindow.closed) {
+                popupWindow.focus();
+                return;
+            }
 
-        popupWindow = window.open('', 'IPTracker', 'width=450,height=600,left=100,top=100');
-        
-        popupWindow.document.write(`
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <title>IP Tracker</title>
-                <style>
-                    body {
-                        margin: 0;
-                        padding: 20px;
-                        background-color: #0d0d0d;
-                        font-family: Arial, sans-serif;
-                        color: #e0e0e0;
-                    }
-                    #ip-container {
-                        background-color: #0d0d0d;
-                        border: 1px solid #6a0dad;
-                        borderRadius: 12px;
-                        padding: 20px;
-                        boxShadow: 0 4px 12px rgba(106, 13, 173, 0.6);
-                    }
-                    h3 {
-                        margin: 0 0 20px 0;
-                        color: #bb86fc;
-                    }
-                    button {
-                        padding: 10px 15px;
-                        border: none;
-                        background-color: #6a0dad;
-                        color: white;
-                        border-radius: 8px;
-                        cursor: pointer;
-                        margin-right: 5px;
-                    }
-                    button:hover {
-                        background-color: #8e24aa;
-                    }
-                    .ip-item {
-                        display: flex;
-                        flex-direction: column;
-                        background-color: #1a1a1a;
-                        border: 1px solid #6a0dad;
-                        padding: 15px;
-                        margin-bottom: 10px;
-                        border-radius: 8px;
-                        box-shadow: 0 2px 6px rgba(106,13,173,0.5);
-                    }
-                    .ip-item span {
-                        margin-bottom: 5px;
-                    }
-                    .ip-item strong {
-                        color: #bb86fc;
-                    }
-                    .ip-buttons {
-                        display: flex;
-                        gap: 8px;
-                        margin-top: 10px;
-                    }
-                    .ip-buttons button {
-                        flex: 1;
-                    }
-                    .maps-btn {
-                        background: #1e88e5 !important;
-                    }
-                </style>
-            </head>
-            <body>
-                <div id="ip-container">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-                        <h3>Detected IP Addresses</h3>
-                        <button id="clear-btn">Clear</button>
+            popupWindow = window.open('', 'IPTracker', 'width=450,height=600,left=100,top=100');
+            
+            popupWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>IP Tracker</title>
+                    <style>
+                        body {
+                            margin: 0;
+                            padding: 20px;
+                            background-color: #0d0d0d;
+                            font-family: Arial, sans-serif;
+                            color: #e0e0e0;
+                        }
+                        #ip-container {
+                            background-color: #0d0d0d;
+                            border: 1px solid #6a0dad;
+                            borderRadius: 12px;
+                            padding: 20px;
+                            boxShadow: 0 4px 12px rgba(106, 13, 173, 0.6);
+                        }
+                        h3 {
+                            margin: 0 0 20px 0;
+                            color: #bb86fc;
+                        }
+                        button {
+                            padding: 10px 15px;
+                            border: none;
+                            background-color: #6a0dad;
+                            color: white;
+                            border-radius: 8px;
+                            cursor: pointer;
+                            margin-right: 5px;
+                        }
+                        button:hover {
+                            background-color: #8e24aa;
+                        }
+                        .ip-item {
+                            display: flex;
+                            flex-direction: column;
+                            background-color: #1a1a1a;
+                            border: 1px solid #6a0dad;
+                            padding: 15px;
+                            margin-bottom: 10px;
+                            border-radius: 8px;
+                            box-shadow: 0 2px 6px rgba(106,13,173,0.5);
+                        }
+                        .ip-item span {
+                            margin-bottom: 5px;
+                        }
+                        .ip-item strong {
+                            color: #bb86fc;
+                        }
+                        .ip-buttons {
+                            display: flex;
+                            gap: 8px;
+                            margin-top: 10px;
+                        }
+                        .ip-buttons button {
+                            flex: 1;
+                        }
+                        .maps-btn {
+                            background: #1e88e5 !important;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div id="ip-container">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+                            <h3>Detected IP Addresses</h3>
+                        </div>
+                        <div id="ip-addresses"></div>
+                        <div style="margin-top:10px;text-align:center;">
+                            <a href="https://github.com/VeltrixJS" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;background-color:#6a0dad;color:white;padding:8px 16px;text-decoration:none;font-weight:600;border-radius:6px;font-size:14px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.744.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.835 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.332-5.466-5.93 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23a11.5 11.5 0 013.003-.404c1.018.005 2.045.138 3.003.404 2.292-1.552 3.298-1.23 3.298-1.23.653 1.653.242 2.873.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.803 5.624-5.475 5.921.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .319.218.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                                Suivez-moi sur GitHub
+                            </a>
+                        </div>
                     </div>
-                    <div id="ip-addresses"></div>
-                    <div style="margin-top:10px;text-align:center;">
-                        <a href="https://github.com/VeltrixJS" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;background-color:#6a0dad;color:white;padding:8px 16px;text-decoration:none;font-weight:600;border-radius:6px;font-size:14px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.744.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.835 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.332-5.466-5.93 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23a11.5 11.5 0 013.003-.404c1.018.005 2.045.138 3.003.404 2.292-1.552 3.298-1.23 3.298-1.23.653 1.653.242 2.873.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.803 5.624-5.475 5.921.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .319.218.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-                            Suivez-moi sur GitHub
-                        </a>
-                    </div>
-                </div>
-            </body>
-            </html>
-        `);
+                </body>
+                </html>
+            `);
 
-        popupWindow.document.close();
-
-        popupWindow.document.getElementById('clear-btn').onclick = () => {
-            popupWindow.document.getElementById('ip-addresses').innerHTML = '';
+            popupWindow.document.close();
         };
-    };
 
-    document.getElementById('clear-ip-list').onclick = () => {
-        document.getElementById('ip-addresses').innerHTML = '';
-    };
-    
-    document.getElementById('close-ip-container').onclick = () => {
-        ipContainer.remove();
-    };
+        document.getElementById('close-ip-container').onclick = () => {
+            miniContainer.style.top = ipContainer.offsetTop + 'px';
+            miniContainer.style.left = ipContainer.offsetLeft + 'px';
+            ipContainer.style.display = 'none';
+            miniContainer.style.display = 'flex';
+        };
+    }
+
+    setupEventListeners();
 
     function makeDraggable(el, handle) {
         let posX = 0, posY = 0, mouseX = 0, mouseY = 0;
+        let isDragging = false;
+        let startX = 0, startY = 0;
+        
         handle.onmousedown = (e) => {
             e.preventDefault();
+            isDragging = false;
+            startX = e.clientX;
+            startY = e.clientY;
             mouseX = e.clientX;
             mouseY = e.clientY;
-            document.onmouseup = () => document.onmousemove = null;
+            document.onmouseup = () => {
+                document.onmousemove = null;
+                if (!isDragging && el.id === 'mini-ip-container') {
+                    ipContainer.style.top = miniContainer.offsetTop + 'px';
+                    ipContainer.style.left = miniContainer.offsetLeft + 'px';
+                    ipContainer.style.display = 'block';
+                    miniContainer.style.display = 'none';
+                    setupEventListeners();
+                }
+            };
             document.onmousemove = (e) => {
+                if (Math.abs(e.clientX - startX) > 5 || Math.abs(e.clientY - startY) > 5) {
+                    isDragging = true;
+                }
                 posX = mouseX - e.clientX;
                 posY = mouseY - e.clientY;
                 mouseX = e.clientX;
@@ -171,8 +208,9 @@
         };
     }
     makeDraggable(ipContainer, document.getElementById('drag-handle'));
+    makeDraggable(miniContainer, miniContainer);
 
-    const shownIPs = new Set();
+    let currentIP = null;
     window.oRTCPeerConnection = window.oRTCPeerConnection || window.RTCPeerConnection;
 
     window.RTCPeerConnection = function (...args) {
@@ -185,8 +223,13 @@
                     const fields = iceCandidate.candidate.split(' ');
                     if (fields[7] === 'srflx') {
                         const ip = fields[4];
-                        if (shownIPs.has(ip)) return pc.oaddIceCandidate(iceCandidate, ...rest);
-                        shownIPs.add(ip);
+                        if (currentIP === ip) return pc.oaddIceCandidate(iceCandidate, ...rest);
+                        currentIP = ip;
+
+                        document.getElementById('ip-addresses').innerHTML = '';
+                        if (popupWindow && !popupWindow.closed) {
+                            popupWindow.document.getElementById('ip-addresses').innerHTML = '';
+                        }
 
                         const res = await fetch(`https://ipapi.co/${ip}/json/`);
                         const data = await res.json();
@@ -255,6 +298,17 @@
                             `;
                             popupWindow.document.getElementById('ip-addresses').innerHTML += popupHTML;
                         }
+
+                        const logEntry = {
+                            timestamp: new Date().toISOString(),
+                            ip: ip,
+                            isp: data.org || 'Unknown ISP',
+                            city: city,
+                            region: region,
+                            departmentNumber: departmentNumber,
+                            country: country
+                        };
+                        localStorage.setItem('current_call_ip', JSON.stringify(logEntry));
                     }
                 }
             } catch (err) {
