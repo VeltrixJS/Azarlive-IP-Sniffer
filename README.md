@@ -1,5 +1,6 @@
-# IP Sniffer Widget pour Azar
-Un script JavaScript conçu pour [Azar](https://azarlive.com/) qui détecte les adresses IP publiques via WebRTC et les affiche dans une interface utilisateur moderne, interactive et enrichie avec des données de géolocalisation.
+# 🔍 Azar IP Sniffer
+
+Un script puissant pour détecter et tracker les adresses IP en temps réel sur [Azar](https://azarlive.com/) Live avec géolocalisation automatique.
 
 ---
 
@@ -9,34 +10,73 @@ Un script JavaScript conçu pour [Azar](https://azarlive.com/) qui détecte les 
 - 🌍 Géolocalisation (Ville, Département, ISP)
 - 🗺️ Localisation Google Maps
 - 📺 Mode double écran
-
-## 📌 Utilisation
-
-
-1. Ouvrir https://azarlive.com/ dans votre navigateur.
-2. Copier le script `ip-sniffer.js`.
-3. Ouvrir la console de votre navigateur (**F12 → Console**).
-4. Coller le script et appuyer sur **Entrée**.
-5.  **⚠️ Si erreur au collage :** Tapez `allow pasting` dans la console puis recollez
-6. Le widget apparaît et commence à détecter les IP automatiquement via WebRTC.
-7. **(Optionnel)** Cliquer sur **📺 2ème écran** pour ouvrir une fenêtre popup et la déplacer sur un second écran.
-
-### Contrôles
-
-- **📺 2ème écran** - Ouvre une fenêtre popup
-- **X** - Minimise en icône déplaçable
-- **Copy IP** - Copie l'IP
-- **Google Maps** - Ouvre la localisation
+- 💾 Export JSON
+- 🎨 Interface minimisable
 
 ---
 
+## 🚀 Installation
+
+### Méthode 1 : Avec Tampermonkey (Recommandé)
+
+1. **Installer Tampermonkey**
+   - [Chrome](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
+   - [Firefox](https://addons.mozilla.org/fr/firefox/addon/tampermonkey/)
+   - [Edge](https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd)
+
+2. **Créer le script**
+   - Cliquez sur l'icône Tampermonkey → "Créer un nouveau script"
+   - Supprimez tout le contenu par défaut
+   - Copiez-collez le contenu de `ip-sniffer.js`
+   - Sauvegardez (Ctrl+S ou Cmd+S)
+
+3. **Activer le script**
+   - Le script s'active automatiquement
+   - Vérifiez qu'il est activé (icône verte dans Tampermonkey)
+
+4. **Utiliser**
+   - Rendez-vous sur [azarlive.com](https://azarlive.com/)
+   - Le panneau apparaît automatiquement en haut à droite
+   - Lancez un appel → L'IP s'affiche automatiquement
+
+### Méthode 2 : Console du navigateur
+
+1. Ouvrez [azarlive.com](https://azarlive.com/)
+2. Ouvrez la console (**F12** → **Console**)
+3. Copiez le contenu de `ip-sniffer.js`
+4. Collez dans la console
+5. **⚠️ Si erreur au collage :** Tapez `allow pasting` directement dans la console, puis recollez le script
+6. Appuyez sur **Entrée**
+
+> ⚠️ **Note :** Avec cette méthode, le script se désactive au rechargement de la page. Utilisez Tampermonkey pour une installation permanente.
+
+---
+
+## 📖 Utilisation
+
+### Contrôles
+
+| Bouton | Action |
+|--------|--------|
+| **📺 2ème écran** | Ouvre une fenêtre popup pour monitoring sur second écran |
+| **X** | Minimise l'interface en icône déplaçable |
+| **Copy IP** | Copie l'adresse IP dans le presse-papier |
+| **Google Maps** | Ouvre la localisation dans Google Maps |
+
+### 💡 Icône Minimisée
+
+- Cliquez sur **X** pour minimiser le panneau
+- Une icône apparaît et reste déplaçable
+- Cliquez sur l'icône pour rouvrir le panneau au même endroit
+
+---
 
 ## 📷 Aperçu
 
 ### Interface principale
-<img width="403" height="289" alt="image" src="https://github.com/user-attachments/assets/d9de115f-344a-4984-abd7-d97a0ede3bb2" />
+<img width="403" height="289" alt="Interface principale" src="https://github.com/user-attachments/assets/d9de115f-344a-4984-abd7-d97a0ede3bb2" />
 
 ### Pop-up second écran 
-<img width="450" height="444" alt="image" src="https://github.com/user-attachments/assets/344cc7a7-1174-4c3b-b515-972fbd3333cb" />
+<img width="450" height="444" alt="Pop-up second écran" src="https://github.com/user-attachments/assets/344cc7a7-1174-4c3b-b515-972fbd3333cb" />
 
 
