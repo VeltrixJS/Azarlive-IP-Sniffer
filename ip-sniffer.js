@@ -76,7 +76,7 @@
                 return;
             }
 
-            popupWindow = window.open('', 'IPTracker', 'width=380,height=320,left=100,top=100');
+            popupWindow = window.open('', 'IPTracker', 'width=380,height=325,left=100,top=100');
             
             popupWindow.document.write(`
                 <!DOCTYPE html>
