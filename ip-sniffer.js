@@ -1,3 +1,14 @@
+// ==UserScript==
+// @name         New Userscript
+// @namespace    http://tampermonkey.net/
+// @version      2025-12-22
+// @description  try to take over the world!
+// @author       You
+// @match        https://azarlive.com/
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=azarlive.com
+// @grant        none
+// ==/UserScript==
+
 (function () {
     const createElement = (tag, options = {}, children = []) => {
         const el = document.createElement(tag);
@@ -77,7 +88,7 @@
             }
 
             popupWindow = window.open('', 'IPTracker', 'width=380,height=350,left=100,top=100');
-            
+
             popupWindow.document.write(`
                 <!DOCTYPE html>
                 <html>
@@ -175,7 +186,7 @@
         let posX = 0, posY = 0, mouseX = 0, mouseY = 0;
         let isDragging = false;
         let startX = 0, startY = 0;
-        
+
         handle.onmousedown = (e) => {
             e.preventDefault();
             isDragging = false;
