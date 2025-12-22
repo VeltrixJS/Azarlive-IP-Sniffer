@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name         New Userscript
+// @name         Azar IP Sniffer
 // @namespace    http://tampermonkey.net/
-// @version      2025-12-22
-// @description  try to take over the world!
-// @author       You
-// @match        https://azarlive.com/
+// @version      2.3
+// @description  IP Tracker for Azar with geolocation
+// @author       VeltrixJS
+// @match        https://azarlive.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=azarlive.com
 // @grant        none
 // ==/UserScript==
