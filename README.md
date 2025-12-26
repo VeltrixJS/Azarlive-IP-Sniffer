@@ -10,8 +10,6 @@ Un script puissant pour détecter et tracker les adresses IP en temps réel sur 
 - 🌍 Géolocalisation (Ville, Département, ISP)
 - 🗺️ Localisation Google Maps
 - 📺 Mode double écran
-- 💾 Export JSON
-- 🎨 Interface minimisable
 
 ---
 
@@ -69,14 +67,5 @@ Un script puissant pour détecter et tracker les adresses IP en temps réel sur 
 - Une icône apparaît et reste déplaçable
 - Cliquez sur l'icône pour rouvrir le panneau au même endroit
 
----
-
-## 📷 Aperçu
-
-### Interface principale
-<img width="403" height="289" alt="Interface principale" src="https://github.com/user-attachments/assets/d9de115f-344a-4984-abd7-d97a0ede3bb2" />
-
-### Pop-up second écran 
-<img width="450" height="444" alt="Pop-up second écran" src="https://github.com/user-attachments/assets/344cc7a7-1174-4c3b-b515-972fbd3333cb" />
 
 
