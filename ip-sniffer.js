@@ -7,7 +7,7 @@
 // @match        https://azarlive.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=azarlive.com
 // @grant        none
-// ==/UserScript==
+// ==UserScript==
 
 (function () {
     const AZAR_GREEN = '#51f59b';
