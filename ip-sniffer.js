@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Azar IP Sniffer (Azar Style)
-// @namespace    http://tampermonkey.net/
+// @namespace    https://github.com/VeltrixJS/azar-ip-sniffer
 // @version      2.7
 // @description  IP Tracker for Azar with geolocation (Unlimited API)
 // @author       VeltrixJS
@@ -10,6 +10,7 @@
 // ==/UserScript==
 
 (function () {
+    'use strict';
     const AZAR_GREEN = '#51f59b';
     const AZAR_DARK = '#121212';
     const AZAR_WHITE = '#ffffff';
