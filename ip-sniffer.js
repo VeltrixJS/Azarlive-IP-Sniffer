@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Azar IP Sniffer (Azar Style)
+// @name         Azar IP Sniffer
 // @namespace    https://github.com/VeltrixJS/azar-ip-sniffer
 // @version      2.7
 // @description  IP Tracker for Azar with geolocation (Unlimited API)
