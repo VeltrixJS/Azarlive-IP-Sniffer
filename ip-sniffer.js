@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name         Azar IP Sniffer (Azar Style)
 // @namespace    http://tampermonkey.net/
-// @version      2.5
+// @version      2.7
 // @description  IP Tracker for Azar with geolocation (Unlimited API)
 // @author       VeltrixJS
 // @match        https://azarlive.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=azarlive.com
 // @grant        none
-// ==UserScript==
+// ==/UserScript==
 
 (function () {
     const AZAR_GREEN = '#51f59b';
