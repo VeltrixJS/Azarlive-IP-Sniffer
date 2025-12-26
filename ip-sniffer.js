@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Azar IP Sniffer (Azar Style)
 // @namespace    http://tampermonkey.net/
-// @version      2.5
+// @version      2.7
 // @description  IP Tracker for Azar with geolocation (Unlimited API)
 // @author       VeltrixJS
 // @match        https://azarlive.com/*
@@ -94,7 +94,7 @@
                 return;
             }
 
-            popupWindow = window.open('', 'IPTracker', 'width=380,height=400,left=100,top=100');
+            popupWindow = window.open('', 'IPTracker', 'width=420,height=380,left=100,top=100');
 
             popupWindow.document.write(`
                 <!DOCTYPE html>
@@ -106,7 +106,7 @@
                             margin: 0;
                             padding: 20px;
                             background-color: ${AZAR_DARK};
-                            font-family: 'Segoe UI', Arial, sans-serif;
+                            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
                             color: ${AZAR_WHITE};
                         }
                         #ip-container {
@@ -117,35 +117,89 @@
                             color: ${AZAR_GREEN};
                             text-transform: uppercase;
                             font-size: 18px;
+                            font-weight: 800;
+                            letter-spacing: 1px;
                         }
                         .ip-item {
                             display: flex;
                             flex-direction: column;
                             background-color: #1c1c1c;
-                            border: 1px solid #333;
+                            border-left: 4px solid ${AZAR_GREEN};
                             padding: 15px;
                             margin-bottom: 15px;
-                            border-radius: 12px;
+                            border-radius: 8px;
+                            color: ${AZAR_WHITE};
                         }
-                        .ip-item strong { color: ${AZAR_GREEN}; margin-right: 5px; }
-                        .ip-buttons { display: flex; gap: 8px; margin-top: 15px; }
+                        .ip-item strong { 
+                            color: ${AZAR_GREEN}; 
+                            margin-right: 5px; 
+                        }
+                        .time-label {
+                            margin-bottom: 8px;
+                            font-size: 12px;
+                            opacity: 0.6;
+                        }
+                        .info-line {
+                            margin-bottom: 4px;
+                        }
+                        .ip-buttons { 
+                            display: flex; 
+                            gap: 8px; 
+                            margin-top: 12px; 
+                        }
                         button {
                             flex: 1;
-                            padding: 10px;
+                            padding: 8px;
                             border: none;
                             background-color: ${AZAR_GREEN};
                             color: ${AZAR_DARK};
-                            border-radius: 8px;
+                            border-radius: 6px;
                             cursor: pointer;
-                            font-weight: bold;
+                            font-weight: 600;
+                            transition: all 0.2s;
                         }
-                        .maps-btn { background: #ffffff !important; color: #000 !important; }
+                        button:hover {
+                            opacity: 0.8;
+                            transform: translateY(-1px);
+                        }
+                        .maps-btn { 
+                            background: ${AZAR_WHITE} !important; 
+                            color: ${AZAR_DARK} !important; 
+                        }
+                        .github-link {
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 8px;
+                            background-color: #222;
+                            color: ${AZAR_GREEN};
+                            border: 1px solid ${AZAR_GREEN};
+                            padding: 8px 16px;
+                            text-decoration: none;
+                            font-weight: 600;
+                            border-radius: 8px;
+                            font-size: 12px;
+                            transition: all 0.2s;
+                            margin-top: 15px;
+                        }
+                        .github-link:hover {
+                            background-color: ${AZAR_GREEN};
+                            color: ${AZAR_DARK};
+                        }
                     </style>
                 </head>
                 <body>
                     <div id="ip-container">
                         <h3>Live IP Tracker</h3>
                         <div id="ip-addresses"></div>
+                        <div style="text-align:center;">
+                            <a href="https://github.com/VeltrixJS" target="_blank" class="github-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.744.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.835 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.332-5.466-5.93 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23a11.5 11.5 0 013.003-.404c1.018.005 2.045.138 3.003.404 2.292-1.552 3.298-1.23 3.298-1.23.653 1.653.242 2.873.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.803 5.624-5.475 5.921.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .319.218.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                                </svg>
+                                GitHub
+                            </a>
+                        </div>
                     </div>
                 </body>
                 </html>
@@ -231,13 +285,11 @@
                             popupWindow.document.getElementById('ip-addresses').innerHTML = '';
                         }
 
-                        // Système multi-API avec fallback automatique
                         console.log('[Azar Sniffer] Fetching data for IP:', ip);
                         
                         let data = null;
                         let isp = 'N/A';
                         
-                        // API 1: ip-api.com (45/min, illimité/jour) - PRIORITÉ
                         try {
                             const res1 = await fetch(`http://ip-api.com/json/${ip}`);
                             const data1 = await res1.json();
@@ -256,7 +308,6 @@
                         } catch (error) {
                             console.log('[Azar Sniffer] ip-api.com failed, trying ipapi.co...');
                             
-                            // API 2: ipapi.co (1000/jour)
                             try {
                                 const res2 = await fetch(`https://ipapi.co/${ip}/json/`);
                                 const data2 = await res2.json();
@@ -275,7 +326,6 @@
                             } catch (error2) {
                                 console.log('[Azar Sniffer] ipapi.co failed, trying ipwho.is...');
                                 
-                                // API 3: ipwho.is (10k/mois) - DERNIER RECOURS
                                 try {
                                     const res3 = await fetch(`https://ipwho.is/${ip}`);
                                     const data3 = await res3.json();
@@ -304,7 +354,9 @@
                         const country = data?.country || 'Unknown';
 
                         const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(city + ' ' + country)}`;
+                        const time = new Date().toLocaleTimeString();
 
+                        // Interface principale
                         const ipItem = document.createElement('div');
                         ipItem.style.cssText = `
                             display: flex;
@@ -317,7 +369,6 @@
                             color: ${AZAR_WHITE};
                         `;
 
-                        const time = new Date().toLocaleTimeString();
                         ipItem.innerHTML = `
                             <div style="margin-bottom:8px; font-size:12px; opacity:0.6;">Detected at: ${time}</div>
                             <div style="margin-bottom:4px;"><strong style="color:${AZAR_GREEN}">IP:</strong> ${ip}</div>
@@ -335,12 +386,14 @@
 
                         document.getElementById('ip-addresses').appendChild(ipItem);
 
+                        // Fenêtre popup avec les mêmes fonctionnalités
                         if (popupWindow && !popupWindow.closed) {
                             const popupHTML = `
                                 <div class="ip-item">
-                                    <span><strong>IP:</strong> ${ip}</span>
-                                    <span><strong>ISP:</strong> ${isp}</span>
-                                    <span><strong>Loc:</strong> ${city} (${region})</span>
+                                    <div class="time-label">Detected at: ${time}</div>
+                                    <div class="info-line"><strong>IP:</strong> ${ip}</div>
+                                    <div class="info-line"><strong>ISP:</strong> ${isp}</div>
+                                    <div class="info-line" style="margin-bottom:12px;"><strong>LOC:</strong> ${city}, ${region} (${departmentNumber}) - ${country}</div>
                                     <div class="ip-buttons">
                                         <button onclick="navigator.clipboard.writeText('${ip}')">Copy</button>
                                         <button class="maps-btn" onclick="window.open('${mapsUrl}', '_blank')">Maps</button>
