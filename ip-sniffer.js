@@ -1,15 +1,19 @@
 // ==UserScript==
-// @name         Azar IP Sniffer
+// @name         Azar IP Sniffer (Azar Style)
 // @namespace    http://tampermonkey.net/
-// @version      2.3
-// @description  IP Tracker for Azar with geolocation
+// @version      2.5
+// @description  IP Tracker for Azar with geolocation (Unlimited API)
 // @author       VeltrixJS
 // @match        https://azarlive.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=azarlive.com
 // @grant        none
-// ==/UserScript==
+// ==UserScript==
 
 (function () {
+    const AZAR_GREEN = '#51f59b';
+    const AZAR_DARK = '#121212';
+    const AZAR_WHITE = '#ffffff';
+
     const createElement = (tag, options = {}, children = []) => {
         const el = document.createElement(tag);
         Object.assign(el, options);
@@ -26,15 +30,15 @@
             right: '10px',
             width: '400px',
             maxHeight: '500px',
-            backgroundColor: '#0d0d0d',
-            border: '1px solid #6a0dad',
-            borderRadius: '12px',
+            backgroundColor: AZAR_DARK,
+            border: `1px solid ${AZAR_GREEN}`,
+            borderRadius: '16px',
             padding: '20px',
             zIndex: '10000',
-            fontFamily: 'Arial, sans-serif',
+            fontFamily: 'Inter, Arial, sans-serif',
             fontSize: '14px',
-            boxShadow: '0 4px 12px rgba(106, 13, 173, 0.6)',
-            color: '#e0e0e0',
+            boxShadow: `0 8px 32px rgba(81, 245, 155, 0.2)`,
+            color: AZAR_WHITE,
             resize: 'both',
             overflow: 'auto',
         }
@@ -42,16 +46,20 @@
 
     ipContainer.innerHTML = `
         <div id="drag-handle" style="cursor:move;margin-bottom:20px;">
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
-                <h3 style="margin:0;color:#bb86fc;">Detected IP Addresses</h3>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                <h3 style="margin:0;color:${AZAR_GREEN};font-weight:800;text-transform:uppercase;letter-spacing:1px;">Detected IP</h3>
                 <div style="display:flex;gap:8px;">
-                    <button id="open-popup" style="padding:10px 15px;border:none;background-color:#1e88e5;color:white;border-radius:8px;cursor:pointer;font-weight:600;white-space:nowrap;">📺 2ème écran</button>
-                    <button id="close-ip-container" style="padding:10px 15px;border:none;background-color:#6a0dad;color:white;border-radius:8px;cursor:pointer;font-weight:bold;">X</button>
+                    <button id="open-popup" style="padding:8px 12px;border:1px solid ${AZAR_GREEN};background-color:transparent;color:${AZAR_GREEN};border-radius:8px;cursor:pointer;font-weight:600;font-size:12px;">📺 POPUP</button>
+                    <button id="close-ip-container" style="padding:8px 12px;border:none;background-color:${AZAR_GREEN};color:${AZAR_DARK};border-radius:8px;cursor:pointer;font-weight:bold;">X</button>
                 </div>
             </div>
         </div>
         <div id="ip-addresses"></div>
-        <div style="margin-top:10px;text-align:center;"> <a href="https://github.com/VeltrixJS" target="_blank" style=" display:inline-flex; align-items:center; justify-content:center; gap:8px; background-color:#6a0dad; color:white; padding:8px 16px; text-decoration:none; font-weight:600; border-radius:6px; font-size:14px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; transition: background-color 0.2s, transform 0.1s; " onmouseover="this.style.backgroundColor='#8e24aa'; this.style.transform='scale(1.05)';" onmouseout="this.style.backgroundColor='#6a0dad'; this.style.transform='scale(1)';"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" viewBox="0 0 24 24"> <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.744.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.835 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.332-5.466-5.93 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23a11.5 11.5 0 013.003-.404c1.018.005 2.045.138 3.003.404 2.292-1.552 3.298-1.23 3.298-1.23.653 1.653.242 2.873.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.803 5.624-5.475 5.921.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .319.218.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/> </svg> Suivez-moi sur GitHub </a> </div>
+        <div style="margin-top:15px;text-align:center;"> 
+            <a href="https://github.com/VeltrixJS" target="_blank" style=" display:inline-flex; align-items:center; justify-content:center; gap:8px; background-color:#222; color:${AZAR_GREEN}; border:1px solid ${AZAR_GREEN}; padding:8px 16px; text-decoration:none; font-weight:600; border-radius:8px; font-size:12px; transition: all 0.2s;" onmouseover="this.style.backgroundColor='${AZAR_GREEN}'; this.style.color='${AZAR_DARK}';" onmouseout="this.style.backgroundColor='#222'; this.style.color='${AZAR_GREEN}';"> 
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"> <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.744.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.835 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.332-5.466-5.93 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23a11.5 11.5 0 013.003-.404c1.018.005 2.045.138 3.003.404 2.292-1.552 3.298-1.23 3.298-1.23.653 1.653.242 2.873.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.803 5.624-5.475 5.921.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .319.218.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/> </svg> GitHub 
+            </a> 
+        </div>
     `;
     document.body.appendChild(ipContainer);
 
@@ -61,21 +69,20 @@
             position: 'fixed',
             top: '10px',
             right: '10px',
-            width: '60px',
-            height: '60px',
-            backgroundColor: '#0d0d0d',
-            border: '2px solid #6a0dad',
+            width: '50px',
+            height: '50px',
+            backgroundColor: AZAR_DARK,
+            border: `2px solid ${AZAR_GREEN}`,
             borderRadius: '50%',
             zIndex: '10000',
             cursor: 'pointer',
             display: 'none',
             justifyContent: 'center',
             alignItems: 'center',
-            fontSize: '24px',
-            boxShadow: '0 4px 12px rgba(106, 13, 173, 0.6)',
+            boxShadow: `0 0 15px ${AZAR_GREEN}66`,
         }
     });
-    miniContainer.innerHTML = '<img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyNTYiIHI9IjI0MCIgc3Ryb2tlPSIjYmI4NmZjIiBzdHJva2Utd2lkdGg9IjgiIGZpbGw9Im5vbmUiLz4KPHBhdGggZD0iTTI1NiAxNDBDMjA0IDE0MCAxNjAgMTg0IDE2MCAyMzZDMTYwIDI4OCAyMDQgMzMyIDI1NiAzMzJDMzA4IDMzMiAzNTIgMjg4IDM1MiAyMzZDMzUyIDE4NCAzMDggMTQwIDI1NiAxNDAiIHN0cm9rZT0iI2JiODZmYyIgc3Ryb2tlLXdpZHRoPSI4IiBmaWxsPSJub25lIi8+CjxwYXRoIGQ9Ik0yMzAgMzYwTDI1NiA0MDBMMjgyIDM2MEgyMzBaIiBmaWxsPSIjYmI4NmZjIi8+CjxyZWN0IHg9IjE5MCIgeT0iMjEwIiB3aWR0aD0iMTMyIiBoZWlnaHQ9IjUyIiByeD0iOCIgc3Ryb2tlPSIjYmI4NmZjIiBzdHJva2Utd2lkdGg9IjYiIGZpbGw9Im5vbmUiLz4KPHRleHQgeD0iMjU2IiB5PSIyNDUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIzNiIgZmlsbD0iI2JiODZmYyIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SUAgPC90ZXh0Pgo8L3N2Zz4=" style="width:50px;height:50px;"/>';
+    miniContainer.innerHTML = `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="${AZAR_GREEN}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>`;
     document.body.appendChild(miniContainer);
 
     let popupWindow = null;
@@ -87,88 +94,62 @@
                 return;
             }
 
-            popupWindow = window.open('', 'IPTracker', 'width=380,height=350,left=100,top=100');
+            popupWindow = window.open('', 'IPTracker', 'width=380,height=400,left=100,top=100');
 
             popupWindow.document.write(`
                 <!DOCTYPE html>
                 <html>
                 <head>
-                    <title>IP Tracker</title>
+                    <title>Azar IP Tracker</title>
                     <style>
                         body {
                             margin: 0;
                             padding: 20px;
-                            background-color: #0d0d0d;
-                            font-family: Arial, sans-serif;
-                            color: #e0e0e0;
+                            background-color: ${AZAR_DARK};
+                            font-family: 'Segoe UI', Arial, sans-serif;
+                            color: ${AZAR_WHITE};
                         }
                         #ip-container {
-                            background-color: #0d0d0d;
-                            border: 1px solid #6a0dad;
-                            borderRadius: 12px;
-                            padding: 20px;
-                            boxShadow: 0 4px 12px rgba(106, 13, 173, 0.6);
+                            background-color: ${AZAR_DARK};
                         }
                         h3 {
                             margin: 0 0 20px 0;
-                            color: #bb86fc;
-                        }
-                        button {
-                            padding: 10px 15px;
-                            border: none;
-                            background-color: #6a0dad;
-                            color: white;
-                            border-radius: 8px;
-                            cursor: pointer;
-                            margin-right: 5px;
-                        }
-                        button:hover {
-                            background-color: #8e24aa;
+                            color: ${AZAR_GREEN};
+                            text-transform: uppercase;
+                            font-size: 18px;
                         }
                         .ip-item {
                             display: flex;
                             flex-direction: column;
-                            background-color: #1a1a1a;
-                            border: 1px solid #6a0dad;
+                            background-color: #1c1c1c;
+                            border: 1px solid #333;
                             padding: 15px;
-                            margin-bottom: 10px;
-                            border-radius: 8px;
-                            box-shadow: 0 2px 6px rgba(106,13,173,0.5);
+                            margin-bottom: 15px;
+                            border-radius: 12px;
                         }
-                        .ip-item span {
-                            margin-bottom: 5px;
-                        }
-                        .ip-item strong {
-                            color: #bb86fc;
-                        }
-                        .ip-buttons {
-                            display: flex;
-                            gap: 8px;
-                            margin-top: 10px;
-                        }
-                        .ip-buttons button {
+                        .ip-item strong { color: ${AZAR_GREEN}; margin-right: 5px; }
+                        .ip-buttons { display: flex; gap: 8px; margin-top: 15px; }
+                        button {
                             flex: 1;
+                            padding: 10px;
+                            border: none;
+                            background-color: ${AZAR_GREEN};
+                            color: ${AZAR_DARK};
+                            border-radius: 8px;
+                            cursor: pointer;
+                            font-weight: bold;
                         }
-                        .maps-btn {
-                            background: #1e88e5 !important;
-                        }
+                        .maps-btn { background: #ffffff !important; color: #000 !important; }
                     </style>
                 </head>
                 <body>
                     <div id="ip-container">
-                        <h3>Detected IP Addresses</h3>
+                        <h3>Live IP Tracker</h3>
                         <div id="ip-addresses"></div>
-                        <div style="margin-top:10px;text-align:center;">
-                            <a href="https://github.com/VeltrixJS" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;gap:4px;background-color:#6a0dad;color:white;padding:5px 10px;text-decoration:none;font-weight:600;border-radius:6px;font-size:11px;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="white" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.744.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.835 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.332-5.466-5.93 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23a11.5 11.5 0 013.003-.404c1.018.005 2.045.138 3.003.404 2.292-1.552 3.298-1.23 3.298-1.23.653 1.653.242 2.873.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.803 5.624-5.475 5.921.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .319.218.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-                                GitHub
-                            </a>
-                        </div>
                     </div>
                 </body>
                 </html>
             `);
-
             popupWindow.document.close();
         };
 
@@ -229,11 +210,20 @@
 
         pc.addIceCandidate = async function (iceCandidate, ...rest) {
             try {
+                console.log('[Azar Sniffer] ICE Candidate:', iceCandidate);
+                
                 if (iceCandidate && iceCandidate.candidate) {
                     const fields = iceCandidate.candidate.split(' ');
+                    console.log('[Azar Sniffer] Candidate fields:', fields);
+                    
                     if (fields[7] === 'srflx') {
                         const ip = fields[4];
-                        if (currentIP === ip) return pc.oaddIceCandidate(iceCandidate, ...rest);
+                        console.log('[Azar Sniffer] Found IP:', ip);
+                        
+                        if (currentIP === ip) {
+                            console.log('[Azar Sniffer] IP already detected, skipping');
+                            return pc.oaddIceCandidate(iceCandidate, ...rest);
+                        }
                         currentIP = ip;
 
                         document.getElementById('ip-addresses').innerHTML = '';
@@ -241,93 +231,128 @@
                             popupWindow.document.getElementById('ip-addresses').innerHTML = '';
                         }
 
-                        const res = await fetch(`https://ipapi.co/${ip}/json/`, {
-                            method: 'GET',
-                            headers: {
-                                'User-Agent': 'Mozilla/5.0'
+                        // Système multi-API avec fallback automatique
+                        console.log('[Azar Sniffer] Fetching data for IP:', ip);
+                        
+                        let data = null;
+                        let isp = 'N/A';
+                        
+                        // API 1: ip-api.com (45/min, illimité/jour) - PRIORITÉ
+                        try {
+                            const res1 = await fetch(`http://ip-api.com/json/${ip}`);
+                            const data1 = await res1.json();
+                            if (data1.status !== 'fail') {
+                                data = {
+                                    city: data1.city,
+                                    region: data1.regionName,
+                                    postal: data1.zip,
+                                    country: data1.country
+                                };
+                                isp = data1.isp || 'N/A';
+                                console.log('[Azar Sniffer] ip-api.com OK:', data1);
+                            } else {
+                                throw new Error('ip-api.com failed');
                             }
-                        });
-                        const data = await res.json();
+                        } catch (error) {
+                            console.log('[Azar Sniffer] ip-api.com failed, trying ipapi.co...');
+                            
+                            // API 2: ipapi.co (1000/jour)
+                            try {
+                                const res2 = await fetch(`https://ipapi.co/${ip}/json/`);
+                                const data2 = await res2.json();
+                                if (!data2.error) {
+                                    data = {
+                                        city: data2.city,
+                                        region: data2.region,
+                                        postal: data2.postal,
+                                        country: data2.country_name
+                                    };
+                                    isp = data2.org || 'N/A';
+                                    console.log('[Azar Sniffer] ipapi.co OK:', data2);
+                                } else {
+                                    throw new Error('ipapi.co failed');
+                                }
+                            } catch (error2) {
+                                console.log('[Azar Sniffer] ipapi.co failed, trying ipwho.is...');
+                                
+                                // API 3: ipwho.is (10k/mois) - DERNIER RECOURS
+                                try {
+                                    const res3 = await fetch(`https://ipwho.is/${ip}`);
+                                    const data3 = await res3.json();
+                                    if (data3.success !== false) {
+                                        data = {
+                                            city: data3.city,
+                                            region: data3.region,
+                                            postal: data3.postal,
+                                            country: data3.country
+                                        };
+                                        isp = data3?.connection?.isp || 'N/A';
+                                        console.log('[Azar Sniffer] ipwho.is OK:', data3);
+                                    } else {
+                                        throw new Error('ipwho.is failed');
+                                    }
+                                } catch (error3) {
+                                    console.error('[Azar Sniffer] All APIs failed!');
+                                }
+                            }
+                        }
 
-                        const city = data.city || 'Unknown City';
-                        const region = data.region || 'Unknown Department';
-                        const postal = data.postal || '';
+                        const city = data?.city || 'Unknown';
+                        const region = data?.region || 'Unknown';
+                        const postal = data?.postal || '';
                         const departmentNumber = postal ? postal.substring(0, 2) : '??';
-                        const country = data.country_name || '';
+                        const country = data?.country || 'Unknown';
 
-                        const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(
-                            city + ' ' + region + ' ' + departmentNumber + ' ' + country
-                        )}`;
+                        const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(city + ' ' + country)}`;
 
                         const ipItem = document.createElement('div');
                         ipItem.style.cssText = `
                             display: flex;
                             flex-direction: column;
-                            background-color: #1a1a1a;
-                            border: 1px solid #6a0dad;
+                            background-color: #1c1c1c;
+                            border-left: 4px solid ${AZAR_GREEN};
                             padding: 15px;
-                            margin-bottom: 10px;
+                            margin-bottom: 12px;
                             border-radius: 8px;
-                            box-shadow: 0 2px 6px rgba(106,13,173,0.5);
-                            color: #e0e0e0;
+                            color: ${AZAR_WHITE};
                         `;
 
                         const time = new Date().toLocaleTimeString();
                         ipItem.innerHTML = `
-                            <span><strong style="color:#bb86fc;">Time:</strong> ${time}</span>
-                            <span><strong style="color:#bb86fc;">IP:</strong> ${ip}</span>
-                            <span><strong style="color:#bb86fc;">ISP:</strong> ${data.org || 'Unknown ISP'}</span>
-                            <span>
-                              <strong style="color:#bb86fc;">Location:</strong>
-                              ${city} (${region} – ${departmentNumber})
-                            </span>
+                            <div style="margin-bottom:8px; font-size:12px; opacity:0.6;">Detected at: ${time}</div>
+                            <div style="margin-bottom:4px;"><strong style="color:${AZAR_GREEN}">IP:</strong> ${ip}</div>
+                            <div style="margin-bottom:4px;"><strong style="color:${AZAR_GREEN}">ISP:</strong> ${isp}</div>
+                            <div style="margin-bottom:12px;"><strong style="color:${AZAR_GREEN}">LOC:</strong> ${city}, ${region} (${departmentNumber}) - ${country}</div>
 
-                            <div style="display:flex;gap:8px;margin-top:10px;">
-                                <button class="copy-btn" style="flex:1;padding:10px;border:none;background:#6a0dad;color:white;border-radius:8px;cursor:pointer;">Copy IP</button>
-                                <button class="maps-btn" style="flex:1;padding:10px;border:none;background:#1e88e5;color:white;border-radius:8px;cursor:pointer;">Google Maps</button>
+                            <div style="display:flex;gap:8px;">
+                                <button class="copy-btn" style="flex:1;padding:8px;border:none;background:${AZAR_GREEN};color:${AZAR_DARK};border-radius:6px;cursor:pointer;font-weight:600;">Copy</button>
+                                <button class="maps-btn" style="flex:1;padding:8px;border:none;background:${AZAR_WHITE};color:${AZAR_DARK};border-radius:6px;cursor:pointer;font-weight:600;">Maps</button>
                             </div>
                         `;
 
-                        ipItem.querySelector('.copy-btn').onclick = () => {
-                            navigator.clipboard.writeText(ip);
-                        };
-
-                        ipItem.querySelector('.maps-btn').onclick = () => {
-                            window.open(mapsUrl, '_blank');
-                        };
+                        ipItem.querySelector('.copy-btn').onclick = () => navigator.clipboard.writeText(ip);
+                        ipItem.querySelector('.maps-btn').onclick = () => window.open(mapsUrl, '_blank');
 
                         document.getElementById('ip-addresses').appendChild(ipItem);
 
                         if (popupWindow && !popupWindow.closed) {
                             const popupHTML = `
                                 <div class="ip-item">
-                                    <span><strong>Time:</strong> ${time}</span>
                                     <span><strong>IP:</strong> ${ip}</span>
-                                    <span><strong>ISP:</strong> ${data.org || 'Unknown ISP'}</span>
-                                    <span><strong>Location:</strong> ${city} (${region} – ${departmentNumber})</span>
+                                    <span><strong>ISP:</strong> ${isp}</span>
+                                    <span><strong>Loc:</strong> ${city} (${region})</span>
                                     <div class="ip-buttons">
-                                        <button onclick="navigator.clipboard.writeText('${ip}')">Copy IP</button>
-                                        <button class="maps-btn" onclick="window.open('${mapsUrl}', '_blank')">Google Maps</button>
+                                        <button onclick="navigator.clipboard.writeText('${ip}')">Copy</button>
+                                        <button class="maps-btn" onclick="window.open('${mapsUrl}', '_blank')">Maps</button>
                                     </div>
                                 </div>
                             `;
                             popupWindow.document.getElementById('ip-addresses').innerHTML += popupHTML;
                         }
-
-                        const logEntry = {
-                            timestamp: new Date().toISOString(),
-                            ip: ip,
-                            isp: data.org || 'Unknown ISP',
-                            city: city,
-                            region: region,
-                            departmentNumber: departmentNumber,
-                            country: country
-                        };
-                        localStorage.setItem('current_call_ip', JSON.stringify(logEntry));
                     }
                 }
             } catch (err) {
-                console.error('[WebRTC] Error:', err);
+                console.error('[Azar Sniffer] Error:', err);
             }
             return pc.oaddIceCandidate(iceCandidate, ...rest);
         };
