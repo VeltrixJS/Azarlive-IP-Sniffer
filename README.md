@@ -80,7 +80,8 @@ Un script puissant pour détecter et tracker les adresses IP en temps réel sur 
 
 
 ### Pop-up second écran 
-<img width="377" height="294" alt="image" src="https://github.com/user-attachments/assets/1734bf91-3519-4f66-937e-996d5543b542" />
+<img width="431" height="454" alt="image" src="https://github.com/user-attachments/assets/6d5ec5fc-60b7-4179-8c5d-585dae887126" />
+
 
 
 
