@@ -82,6 +82,15 @@ Un script puissant pour détecter et tracker les adresses IP en temps réel sur 
 ### Pop-up second écran 
 <img width="431" height="454" alt="image" src="https://github.com/user-attachments/assets/6d5ec5fc-60b7-4179-8c5d-585dae887126" />
 
+## ⚖️ Avertissement légal
+
+Ce projet est fourni **à des fins éducatives et de recherche uniquement**.
+
+- L’auteur n’est pas responsable de l’utilisation abusive de ce script.
+- L’utilisation peut être contraire aux conditions d’utilisation d’Azar.
+- Respectez les lois locales sur la vie privée et le consentement.
+
+
 
 
 
