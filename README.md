@@ -76,7 +76,8 @@ Un script puissant pour détecter et tracker les adresses IP en temps réel sur 
 ## 📷 Aperçu
 
 ### Interface principale
-<img width="396" height="291" alt="image" src="https://github.com/user-attachments/assets/4b4206d3-ec61-4362-8ad0-f2177c03e845" />
+<img width="424" height="318" alt="image" src="https://github.com/user-attachments/assets/bb92389f-16ca-479e-8e6c-950652cbabe7" />
+
 
 ### Pop-up second écran 
 <img width="377" height="294" alt="image" src="https://github.com/user-attachments/assets/1734bf91-3519-4f66-937e-996d5543b542" />
