@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Azar IP Scanner
 // @namespace    https://github.com/VeltrixJS/azar-ip-sniffer
-// @version      2.7
+// @version      2.8
 // @description  IP Tracker for Azar with geolocation (Unlimited API)
 // @author       VeltrixJS
 // @match        https://azarlive.com/*
