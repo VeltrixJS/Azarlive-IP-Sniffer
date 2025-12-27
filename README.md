@@ -29,13 +29,15 @@ Un script puissant pour détecter et tracker les adresses IP en temps réel sur 
    - Sauvegardez (Ctrl+S ou Cmd+S)
 
 3. **Activer le script**
-   - Vérifie que, dans les paramètres de Tampermonkey, la case « Autoriser les scripts utilisateurs » soit activée et que le mode développeur soit également activé (en haut à droite) : 
+   - Ouvre la page des extensions Chrome en copiant cette adresse dans ta barre de navigation :
 ```
      chrome://extensions/?id=dhdgffkkebhmkfjojejmpbldmpobfkfo
 ```
-
-   - Le script s'active automatiquement
-   - Vérifiez qu'il est activé (icône verte dans Tampermonkey)
+   - Dans les paramètres de Tampermonkey, vérifie que :
+     - ✅ La case « Autoriser les scripts utilisateurs » est cochée
+     - ✅ Le « Mode développeur » est activé (interrupteur en haut à droite de la page)
+   - Le script s'active automatiquement après installation
+   - Pour vérifier qu'il fonctionne : l'icône doit être verte dans Tampermonkey
      
 5. **Utiliser**
    - Rendez-vous sur [azarlive.com](https://azarlive.com/)
