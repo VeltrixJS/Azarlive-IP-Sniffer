@@ -37,7 +37,6 @@ Un script puissant pour détecter et tracker les adresses IP en temps réel sur 
      - ✅ La case « Autoriser les scripts utilisateurs » est cochée
      - ✅ Le « Mode développeur » est activé (interrupteur en haut à droite de la page)
    - Le script s'active automatiquement après installation
-   - Pour vérifier qu'il fonctionne : l'icône doit être verte dans Tampermonkey
      
 5. **Utiliser**
    - Rendez-vous sur [azarlive.com](https://azarlive.com/)
