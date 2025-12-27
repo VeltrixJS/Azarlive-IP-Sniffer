@@ -33,6 +33,7 @@ Un script puissant pour détecter et tracker les adresses IP en temps réel sur 
 ```
      chrome://extensions/?id=dhdgffkkebhmkfjojejmpbldmpobfkfo
 ```
+
    - Le script s'active automatiquement
    - Vérifiez qu'il est activé (icône verte dans Tampermonkey)
      
