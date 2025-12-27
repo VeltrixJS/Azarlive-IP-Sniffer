@@ -47,7 +47,7 @@ Un script puissant pour détecter et tracker les adresses IP en temps réel sur 
 
 1. Ouvrez [azarlive.com](https://azarlive.com/)
 2. Ouvrez la console (**F12** → **Console**)
-3. Copiez le contenu de `ip-sniffer.js`
+3. Copiez le contenu de `ip-scanner.js`
 4. Collez dans la console
 5. **⚠️ Si erreur au collage :** Tapez `allow pasting` directement dans la console, puis recollez le script
 6. Appuyez sur **Entrée**
