@@ -25,7 +25,7 @@ Un script puissant pour détecter et tracker les adresses IP en temps réel sur 
 2. **Créer le script**
    - Cliquez sur l'icône Tampermonkey → "Créer un nouveau script"
    - Supprimez tout le contenu par défaut
-   - Copiez-collez le contenu de `ip-sniffer.js`
+   - Copiez-collez le contenu de `ip-scanner.js`
    - Sauvegardez (Ctrl+S ou Cmd+S)
 
 3. **Activer le script**
